@@ -10,7 +10,7 @@ type NewComponentType = {
     students: Array<StudentType>
 }
 
-export const NewComponent = (props: NewComponentType) => {
+export const Students = (props: NewComponentType) => {
     return (
         <ul>
             {props.students.map((objectStudent, index) => {
