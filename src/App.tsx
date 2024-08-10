@@ -1,9 +1,15 @@
 import {useState} from "react";
+import {FilterBanknote} from "./Components/banknote/FilterBanknote";
 
-type BanknoteValuesType = "dollar" | "ruble" | "all"
+export type BanknoteValuesType = "dollar" | "ruble" | "all"
+export type MoneyType = {
+    banknote: BanknoteValuesType
+    nominal: number
+    number: string
+}
 
 function App() {
-    const [money, setMoney] = useState([
+    const [money, setMoney] = useState<MoneyType[]>([
         {banknote: "dollar", nominal: 100, number: "a123456789"},
         {banknote: "dollar", nominal: 50, number: "b123456789"},
         {banknote: "ruble", nominal: 100, number: "c123456789"},
@@ -31,7 +37,11 @@ function App() {
 
     return (
         <>
-            <ul>
+            <FilterBanknote
+                money={currentMoney}
+                onClickFilterHandler={onClickFilterHandler}
+            />
+        {/*    <ul>
                 {currentMoney.map((objFromMoneyArr, index) => {
                     return (
                         <li key={index} >
@@ -46,7 +56,7 @@ function App() {
                 <button onClick={() => onClickFilterHandler('all')}>all</button>
                 <button onClick={() => onClickFilterHandler('dollar')}>dollars</button>
                 <button onClick={() => onClickFilterHandler('ruble')}>rubles</button>
-            </div>
+            </div>*/}
         </>
 
 
