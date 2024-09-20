@@ -1,4 +1,4 @@
-import {BanknoteValuesType, MoneyType} from "../../App";
+import {BanknoteValuesType, MoneyType} from "./AppFilterBanknote";
 
 type Props = {
     money: Array<MoneyType>
