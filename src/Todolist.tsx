@@ -8,7 +8,6 @@ type TaskType = {
 }
 
 type PropsType = {
-    todolistID: string
     title: string
     tasks: Array<TaskType>
     removeTask: (todolistID: string, taskId: string) => void
@@ -16,6 +15,7 @@ type PropsType = {
     addTask: (todolistID: string, title: string) => void
     changeTaskStatus: (todolistID: string, taskId: string, isDone: boolean) => void
     filter: FilterValuesType
+    todolistID: string
 }
 
 export function Todolist(props: PropsType) {
@@ -38,14 +38,14 @@ export function Todolist(props: PropsType) {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
-        if (e.key === 'Enter') {
+        if (e.charCode === 13) {
             addTask();
         }
     }
 
     const onAllClickHandler = () => props.changeFilter(props.todolistID, "all");
-    const onActiveClickHandler = () => props.changeFilter(props.todolistID, "active");
-    const onCompletedClickHandler = () => props.changeFilter(props.todolistID, "completed");
+    const onActiveClickHandler = () => props.changeFilter(props.todolistID,"active");
+    const onCompletedClickHandler = () => props.changeFilter(props.todolistID,"completed");
 
 
     return <div>
@@ -53,7 +53,7 @@ export function Todolist(props: PropsType) {
         <div>
             <input value={title}
                    onChange={onChangeHandler}
-                   onKeyUp={onKeyPressHandler}
+                   onKeyDown={onKeyPressHandler}
                    className={error ? "error" : ""}
             />
             <button onClick={addTask}>+</button>
