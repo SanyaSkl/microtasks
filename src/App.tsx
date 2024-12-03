@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Error404} from "./components/pages/Error404";
 import {PageOne} from "./components/pages/PageOne";
 import {PageThree} from "./components/pages/PageThree";
@@ -18,10 +18,14 @@ function App() {
                 </div>
                 <div className={styles.content}>
                     <Routes>
+                        <Route path='/' element={<Navigate to={'/adidas'}/>}/>
+
                        <Route path='adidas' element={<PageOne/>} />
                        <Route path='puma' element={<PageTwo/>} />
                        <Route path='abibas' element={<PageThree/>} />
-                       <Route path='*' element={<Error404/>} />
+
+                       <Route path='Error404' element={<Error404/>} />
+                       <Route path='/*' element={<Navigate to={'/Error404'}/>} />
                     </Routes>
                 </div>
             </div>
