@@ -2,9 +2,10 @@ import React from 'react';
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
 import {S} from "./components/pages/_styles"
 import {Error404} from "./components/pages/Error404";
-import {PageOne} from "./components/pages/PageOne";
-import {PageThree} from "./components/pages/PageThree";
-import {PageTwo} from "./components/pages/PageTwo";
+import {Adidas} from "./components/pages/Adidas";
+import {Abibas} from "./components/pages/Abibas";
+import {Model} from "./components/pages/Model";
+import {Puma} from "./components/pages/Puma";
 import styles from "./components/Site.module.css";
 
 const PATH = {
@@ -35,9 +36,10 @@ function App() {
                     <Routes>
                         <Route path={PATH.PAGE0} element={<Navigate to={'/adidas'}/>}/>
 
-                        <Route path={PATH.PAGE1} element={<PageOne/>}/>
-                        <Route path={PATH.PAGE2} element={<PageTwo/>}/>
-                        <Route path={PATH.PAGE3} element={<PageThree/>}/>
+                        <Route path={PATH.PAGE1} element={<Adidas/>}/>
+                        <Route path={PATH.PAGE2} element={<Puma/>}/>
+                        <Route path={PATH.PAGE3} element={<Abibas/>}/>
+                        <Route path={'/adidas/:id'} element={<Model/>}/>
 
                         <Route path={PATH.PAGE4} element={<Error404/>}/>
                     </Routes>
