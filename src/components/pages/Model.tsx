@@ -1,11 +1,25 @@
 import {useParams} from "react-router-dom";
 import {S} from "./_styles";
 import {adidasArr} from "./Adidas";
+import {pumaArr} from "./Puma";
 
+const getArrayByBrand = (brand: string | undefined) => {
+    switch (brand) {
+        case 'adidas':
+            return adidasArr;
+        case 'puma':
+            return pumaArr;
+        default:
+            return [];
+    }
+};
 
 export const Model = () => {
     const params = useParams()
-    const currentModel = adidasArr.find(el => el.id === Number(params.id))
+    const {brand} = params
+    const productsArray = getArrayByBrand(brand)
+    const currentModel = productsArray.find(el => el.id === Number(params.id))
+
     return (
         <div>
             {
