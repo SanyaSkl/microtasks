@@ -1,38 +1,37 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import pumaModel3 from "../../assets/AdiFOM_TRXN_Shoes_Black_IG7453_01_standard.webp";
-import pumaModel2
-    from "../../assets/PostMove_Mid_Cloudfoam_Super_Lifestyle_Basketball_Mid_Classic_Shoes_Black_GY7163_01_standard.webp";
-import pumaModel1 from "../../assets/Superstar_XLG_Shoes_Black_IG9777_01_standard.webp";
+import pumaModel3 from "../../assets/Puma/PUMA RS-X Efekt PRM.webp";
+import pumaModel2 from "../../assets/Puma/Puma Nucleus.webp";
+import pumaModel1 from "../../assets/Puma/Puma Genetics.webp";
 import {S} from "./_styles";
 
-export type PumaItem = {
+export type PumaItemType = {
     id: number
     model: string;
     collection: string;
     price: string;
     picture: string;
 }
-export const pumaArr: PumaItem[] = [
+export const pumaArr: PumaItemType[] = [
     {
         id: 1,
         model: 'PUMA GENETICS',
         collection: 'new collection1',
-        price: '100200$',
+        price: '500$',
         picture: pumaModel1,
     },
     {
         id: 2,
         model: 'PUMA NUCLEUS',
         collection: 'new collection2',
-        price: '200300$',
+        price: '600$',
         picture: pumaModel2
     },
     {
         id: 3,
         model: 'PUMA RS-X Efekt PRM',
         collection: 'new collection3',
-        price: '300400$',
+        price: '700$',
         picture: pumaModel3
     }
 ]
@@ -40,7 +39,7 @@ export const pumaArr: PumaItem[] = [
 export const Puma = () => {
     return (
         <div>
-            <S.Title>ADIDAS</S.Title>
+            <S.Title>PUMA</S.Title>
 
             <S.ImgWrap>
                 {pumaArr.map((puma, id) => (

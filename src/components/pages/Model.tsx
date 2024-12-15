@@ -1,24 +1,23 @@
 import {useParams} from "react-router-dom";
 import {S} from "./_styles";
-import {adidasArr} from "./Adidas";
-import {pumaArr} from "./Puma";
+import {adidasArr, AdidasItemType} from "./Adidas";
+import {pumaArr, PumaItemType} from "./Puma";
 
-const getArrayByBrand = (brand: string | undefined) => {
-    switch (brand) {
-        case 'adidas':
-            return adidasArr;
-        case 'puma':
-            return pumaArr;
-        default:
-            return [];
-    }
-};
+type CrossModels = {
+    [key: string]: (AdidasItemType | PumaItemType)[]
+}
+
+const crossModels: CrossModels = {
+    adidas: adidasArr,
+    puma: pumaArr
+}
+
 
 export const Model = () => {
-    const params = useParams()
-    const {brand} = params
-    const productsArray = getArrayByBrand(brand)
-    const currentModel = productsArray.find(el => el.id === Number(params.id))
+    const {model, id} = useParams()
+
+    const productsArray = crossModels[model || '']
+    const currentModel = productsArray ? productsArray.find(el => el.id === Number(id)) : null
 
     return (
         <div>

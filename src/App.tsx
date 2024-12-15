@@ -6,7 +6,6 @@ import {Adidas} from "./components/pages/Adidas";
 import {Abibas} from "./components/pages/Abibas";
 import {Model} from "./components/pages/Model";
 import {Puma} from "./components/pages/Puma";
-import styles from "./components/Site.module.css";
 
 const PATH = {
     PAGE0: '/',
@@ -32,20 +31,20 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
 
                 </S.Nav>
-                <S.Content className={styles.content}>
+                <S.Content>
                     <Routes>
                         <Route path={PATH.PAGE0} element={<Navigate to={'/adidas'}/>}/>
 
                         <Route path={PATH.PAGE1} element={<Adidas/>}/>
                         <Route path={PATH.PAGE2} element={<Puma/>}/>
                         <Route path={PATH.PAGE3} element={<Abibas/>}/>
-                        <Route path={'/adidas/:id'} element={<Model/>}/>
+                        <Route path={'/:model/:id'} element={<Model/>}/>
 
                         <Route path={PATH.PAGE4} element={<Error404/>}/>
                     </Routes>
                 </S.Content>
             </S.Body>
-            <S.Footer className={styles.footer}>abibas 2023</S.Footer>
+            <S.Footer>abibas 2023</S.Footer>
         </div>
     );
 }

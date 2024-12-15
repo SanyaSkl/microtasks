@@ -51,7 +51,7 @@ const Content = styled.div`
 const Footer = styled.footer`
   background-color: #000000;
   width: 100%;
-  height: 120px;
+  height: 90px;
   text-align: center;
   color: white;
 `
