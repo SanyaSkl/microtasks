@@ -1,53 +1,86 @@
+import {Menu} from "@mui/icons-material";
+import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import React from 'react';
-import {Navigate, NavLink, Route, Routes} from "react-router-dom";
-import {S} from "./components/pages/_styles"
-import {Error404} from "./components/pages/Error404";
-import {Adidas} from "./components/pages/Adidas";
-import {Abibas} from "./components/pages/Abibas";
-import {Model} from "./components/pages/Model";
-import {Puma} from "./components/pages/Puma";
 
-const PATH = {
-    PAGE0: '/',
-    PAGE1: '/adidas',
-    PAGE2: '/puma',
-    PAGE3: '/abibas',
-    PAGE4: '/*'
-} as const
+import {useDispatch, useSelector} from 'react-redux';
+import {AddItemForm} from './AddItemForm';
+import './App.css';
+import {tasksSelector} from "./state/selectors/tasksSelector";
+import {todolistsSelector} from "./state/selectors/todolistsSelector";
+import {addTodolistAC} from './state/todolists-reducer';
+import {TaskType, Todolist} from './Todolist';
+
+export type FilterValuesType = "all" | "active" | "completed";
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+}
+
+export type TasksStateType = {
+    [key: string]: Array<TaskType>
+}
+
 
 function App() {
+
+    const todolists = useSelector(todolistsSelector)
+    const tasks = useSelector(tasksSelector)
+
+    const dispatch = useDispatch();
+
+    function addTodolist(title: string) {
+        const action = addTodolistAC(title)
+        debugger
+        dispatch(action)
+    }
+
     return (
-        <div>
-            <S.Header><h1>HEADER</h1></S.Header>
-            <S.Body>
-                <S.Nav>
+        <div className="App">
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
+                        News
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Container fixed>
+                <Grid container style={{padding: "20px"}}>
+                    <AddItemForm addItem={addTodolist}/>
+                </Grid>
+                <Grid container spacing={3}>
+                    {
+                        todolists.map(tl => {
+                            let allTodolistTasks = tasks[tl.id];
+                            let tasksForTodolist = allTodolistTasks;
 
-                    <S.NavWrapper><NavLink to={PATH.PAGE0}>Home</NavLink></S.NavWrapper>
+                            if (tl.filter === "active") {
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === false);
+                            }
+                            if (tl.filter === "completed") {
+                                tasksForTodolist = allTodolistTasks.filter(t => t.isDone === true);
+                            }
 
-                    <S.NavWrapper><NavLink to={PATH.PAGE1}>Adidas</NavLink></S.NavWrapper>
-
-                    <S.NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></S.NavWrapper>
-
-                    <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
-
-                </S.Nav>
-                <S.Content>
-                    <Routes>
-                        <Route path={PATH.PAGE0} element={<Navigate to={'/adidas'}/>}/>
-
-                        <Route path={PATH.PAGE1} element={<Adidas/>}/>
-                        <Route path={PATH.PAGE2} element={<Puma/>}/>
-                        <Route path={PATH.PAGE3} element={<Abibas/>}/>
-                        <Route path={'/:model/:id'} element={<Model/>}/>
-
-                        <Route path={PATH.PAGE4} element={<Error404/>}/>
-                    </Routes>
-                </S.Content>
-            </S.Body>
-            <S.Footer>abibas 2023</S.Footer>
+                            return <Grid item key={tl.id}>
+                                <Paper style={{padding: "10px"}}>
+                                    <Todolist
+                                        id={tl.id}
+                                        title={tl.title}
+                                        tasks={tasksForTodolist}
+                                        filter={tl.filter}
+                                    />
+                                </Paper>
+                            </Grid>
+                        })
+                    }
+                </Grid>
+            </Container>
         </div>
     );
 }
 
 export default App;
-
