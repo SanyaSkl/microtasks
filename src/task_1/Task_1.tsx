@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 
 const CONTAINER_STYLES = {display: 'flex', flexDirection: 'column', gap: 10};
 
@@ -8,7 +8,7 @@ const CONTAINER_STYLES = {display: 'flex', flexDirection: 'column', gap: 10};
 // If change value on input Title component not re-render
 // If change value on input Task_1 component not re-render
 
-export const Task_1 = React.memo(() => {
+export const Task_1 = () => {
     console.log('task1')
 
     return (
@@ -17,7 +17,7 @@ export const Task_1 = React.memo(() => {
             <Title title="I am a title"/>
         </div>
     );
-});
+};
 
 const Title = (props: { title: string }) => {
     console.log('title')
@@ -27,9 +27,9 @@ const Title = (props: { title: string }) => {
 const Input = () => {
     const [value, setValue] = useState('');
 
-    const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
-    }, []);
+    };
     return (
         <input type="text" placeholder="Placeholder" value={value} onChange={handleChange}/>
     );
