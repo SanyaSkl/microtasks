@@ -1,18 +1,23 @@
-import React, {ChangeEvent, useState} from 'react';
-import {Input} from "./Input";
-import {SlowComponent} from './slowComponent/SlowComponent';
+import React, {ChangeEvent, ReactNode, useCallback, useState} from 'react';
 
 
 //find the problem and fix it as part of composition optimization, memo, children
 
-export const Task_3 = () => {
+type Task3PropsType = {
+    children: ReactNode
+}
+
+export const Task_3 = ({children}: Task3PropsType) => {
     console.log('task3')
+    const [value, setValue] = useState('');
+
+    const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => setValue(event.currentTarget.value), []);
 
     return (
         <div>
             <div>Lags when change value</div>
-            <Input/>
-            <SlowComponent />
+            <input type="text" value={value} onChange={onChange}/>
+            {children}
         </div>
     );
 };

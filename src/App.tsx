@@ -1,4 +1,5 @@
-import {Fragment} from 'react';
+import React, {Fragment} from 'react';
+import {SlowComponent} from "./task_3/slowComponent/SlowComponent";
 import {Task_3} from "./task_3/Task_3";
 
 export type UserType = {
@@ -17,7 +18,11 @@ const DATA_7: UserType[] = [
 export const App = () => {
   return (
     <Fragment>
-      <Task_3 />
+
+      <Task_3>
+        <SlowComponent />
+      </Task_3>
+
       <hr />
     </Fragment>
   );
