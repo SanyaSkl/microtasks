@@ -1,29 +1,61 @@
-import React, {Fragment} from 'react';
-import {SlowComponent} from "./task_3/slowComponent/SlowComponent";
-import {Task_3} from "./task_3/Task_3";
+import React from 'react';
+import {Navigate, NavLink, Route, Routes} from 'react-router-dom';
+import {S} from './components/pages/_styles'
+import {Abibas} from './components/pages/Abibas';
+import {Adidas} from './components/pages/Adidas';
+import {Error404} from './components/pages/Error404';
+import {Model} from './components/pages/Model';
+import {Prices} from './components/pages/Prices';
+import {Puma} from './components/pages/Puma';
+import styles from './components/Site.module.css';
 
-export type UserType = {
-  [key: string]: { name: string, id: string }
-};
 
-const DATA_7: UserType[] = [
-  {u1: {name: 'Gleb', id: '1'}},
-  {u2: {name: 'Dima', id: '2'}},
-  {u3: {name: 'Svetlana', id: '3'}},
-  {u4: {name: 'Artur', id: '4'}},
-  {u5: {name: 'Vera', id: '5'}},
-  {u6: {name: 'Vlad', id: '6'}},
-];
+const PATH = {
+    PAGE1: '/adidas',
+    PAGE2: '/puma',
+    PAGE3: '/abibas',
+    PAGE4: '/prices',
 
-export const App = () => {
-  return (
-    <Fragment>
+} as const
 
-      <Task_3>
-        <SlowComponent />
-      </Task_3>
+function App() {
+    return (
+        <div>
+            <div className={styles.header}><h1>HEADER</h1></div>
+            <div className={styles.body}>
+                <div className={styles.nav}>
+                    <S.NavWrapper><NavLink to={PATH.PAGE1}>Adidas</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
+                    <S.NavWrapper><NavLink to={PATH.PAGE4}>Prices</NavLink></S.NavWrapper>
 
-      <hr />
-    </Fragment>
-  );
-};
+                </div>
+                <div className={styles.content}>
+                    <Routes>
+                        <Route path={'/'} element={<Navigate to={PATH.PAGE1}/>}/>
+
+                        <Route path={PATH.PAGE1} element={<Adidas/>}/>
+                        <Route path={PATH.PAGE2} element={<Puma/>}/>
+                        <Route path={PATH.PAGE3} element={<Abibas/>}/>
+                        <Route path={PATH.PAGE4} element={<Prices/>}/>
+
+                        {/*<Route path={'/adidas/:id'} element={<Model/>}/>*/}
+                        <Route path={'/:model/:id'} element={<Model/>}/>
+
+                        <Route path={'/*'} element={<Error404/>}/>
+
+                        {/*<Route path={'/page/error'} element={<Error404/>}/>*/}
+                        {/*<Route path={'/*'} element={<Navigate to={'/page/error'}/>}/>*/}
+                    </Routes>
+
+                </div>
+            </div>
+            <div className={styles.footer}>abibas 2023</div>
+        </div>
+    );
+}
+
+export default App;
+
+
+
