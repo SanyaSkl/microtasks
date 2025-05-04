@@ -19,7 +19,8 @@ const PATH = {
     MODEL: '/:model/:id',
     ERROR: '/error',
     PROTECTED: '/protected',
-    LOGIN: '/login'
+    LOGIN: '/login',
+    HOME: '/'
 } as const
 
 const publicRoutes: RouteObject[] = [
@@ -51,6 +52,10 @@ const publicRoutes: RouteObject[] = [
         path: PATH.LOGIN,
         element: <Login/>
     },
+    {
+        path: PATH.HOME,
+        element: <Adidas/>
+    },
 ]
 const privateRoutes: RouteObject[] = [
     {
@@ -63,7 +68,7 @@ const privateRoutes: RouteObject[] = [
 ]
 
 export const PrivateRoute = () => {
-    const isAuth = false
+    const isAuth = true
     return <>{isAuth ? <ProtectedPage/> : <Navigate to={'/login'}/>}</>
 };
 

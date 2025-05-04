@@ -1,13 +1,6 @@
 import React from 'react';
-import {Navigate, NavLink, Outlet, Route, Routes} from 'react-router-dom';
+import {Link, NavLink, Outlet, useNavigate} from 'react-router-dom';
 import {S} from './components/pages/_styles'
-import {Abibas} from './components/pages/Abibas';
-import {Adidas} from './components/pages/Adidas';
-import {Error404} from './components/pages/Error404';
-import {Model} from './components/pages/Model';
-import {Prices} from './components/pages/Prices';
-import {ProtectedPage} from './components/pages/ProtectedPage';
-import {Puma} from './components/pages/Puma';
 import styles from './components/Site.module.css';
 
 
@@ -20,6 +13,11 @@ const PATH = {
 } as const
 
 function App() {
+    const navigate = useNavigate()
+const navigateHandler = () => {
+        navigate(-1)
+}
+
     return (
         <div>
             <div className={styles.header}><h1>HEADER</h1></div>
@@ -32,6 +30,21 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PAGE5}>ProtectedPage</NavLink></S.NavWrapper>
                 </div>
                 <div className={styles.content}>
+                    <div className={styles.HorizontalNavigation}>
+                        <Link className={styles.LinkLikeButton} to={'/adidas'}>
+                             Главная страница (Adidas)
+                        </Link>
+                        <Link to={'..'} onClick={navigateHandler} className={styles.LinkLikeButton}>
+                            Назад
+                        </Link>
+                    </div>
+
+                    {/*// onClick={(e: MouseEvent<HTMLAnchorElement>) => {*/}
+                    {/*//               e.preventDefault()*/}
+                    {/*//               navigate(-1)*/}
+                    {/*//             }}*/}
+                    {/*//             to={'..'}*/}
+
                     <Outlet/>
                     {/*<Routes>*/}
                     {/*    <Route path={'/'} element={<Navigate to={PATH.PAGE1}/>}/>*/}
