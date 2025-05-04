@@ -6,6 +6,7 @@ import {Adidas} from './components/pages/Adidas';
 import {Error404} from './components/pages/Error404';
 import {Model} from './components/pages/Model';
 import {Prices} from './components/pages/Prices';
+import {ProtectedPage} from './components/pages/ProtectedPage';
 import {Puma} from './components/pages/Puma';
 import styles from './components/Site.module.css';
 
@@ -15,7 +16,7 @@ const PATH = {
     PAGE2: '/puma',
     PAGE3: '/abibas',
     PAGE4: '/prices',
-
+    PAGE5: '/protected',
 } as const
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PAGE4}>Prices</NavLink></S.NavWrapper>
-
+                    <S.NavWrapper><NavLink to={PATH.PAGE5}>ProtectedPage</NavLink></S.NavWrapper>
                 </div>
                 <div className={styles.content}>
                     <Outlet/>
